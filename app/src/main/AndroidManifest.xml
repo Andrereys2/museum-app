@@ -11,21 +11,45 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MuseumApp">
-        <!-- 🔥 ГОЛОВНИЙ ЕКРАН (РЕЄСТРАЦІЯ) -->
-        <activity
-            android:name=".RegisterActivity"
-            android:exported="true">
 
+        <!-- 🔥 SPLASH (СТАРТ) -->
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
 
-        <!-- 🔹 ДРУГИЙ ЕКРАН -->
+        <!-- 🔹 ГОЛОВНИЙ ЕКРАН -->
         <activity
             android:name=".MainActivity"
+            android:exported="false" />
+
+        <!-- 🔹 СПИСОК ЕКСПОНАТІВ -->
+        <activity
+            android:name=".ExhibitsActivity"
+            android:exported="false" />
+
+        <!-- 🔹 ДОДАВАННЯ ЕКСПОНАТА -->
+        <activity
+            android:name=".AddExhibitActivity"
+            android:exported="false" />
+
+        <!-- 🔹 ПРОФІЛЬ -->
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+
+        <!-- 🔹 РЕЄСТРАЦІЯ -->
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false" />
+
+        <!-- 🔹 ЛОГІН -->
+        <activity
+            android:name=".LoginActivity"
             android:exported="false" />
 
     </application>

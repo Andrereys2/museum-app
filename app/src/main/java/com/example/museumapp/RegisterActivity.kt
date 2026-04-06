@@ -3,8 +3,12 @@ package com.example.museumapp
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.*
+import android.view.MotionEvent
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.button.MaterialButton
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -17,10 +21,33 @@ class RegisterActivity : AppCompatActivity() {
         val etLogin = findViewById<EditText>(R.id.etLogin)
         val etPassword = findViewById<EditText>(R.id.etPassword)
         val etRepeatPassword = findViewById<EditText>(R.id.etRepeatPassword)
-        val btnRegister = findViewById<Button>(R.id.btnRegister)
+        val btnRegister = findViewById<MaterialButton>(R.id.btnRegister)
+        val tvLogin = findViewById<TextView>(R.id.tvLogin)
 
         val sharedPref = getSharedPreferences("UserData", Context.MODE_PRIVATE)
 
+        // 🔥 перехід на логін
+        tvLogin.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
+
+        // 🔥 анімація кнопки
+        btnRegister.setOnTouchListener { v, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    v.scaleX = 1.05f
+                    v.scaleY = 1.05f
+                }
+                MotionEvent.ACTION_UP,
+                MotionEvent.ACTION_CANCEL -> {
+                    v.scaleX = 1f
+                    v.scaleY = 1f
+                }
+            }
+            false
+        }
+
+        // 🔥 реєстрація
         btnRegister.setOnClickListener {
 
             val name = etName.text.toString()
@@ -29,7 +56,6 @@ class RegisterActivity : AppCompatActivity() {
             val password = etPassword.text.toString()
             val repeatPassword = etRepeatPassword.text.toString()
 
-            // Перевірки
             if (name.isEmpty() || email.isEmpty() || login.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Заповніть всі поля", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
@@ -50,20 +76,17 @@ class RegisterActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // Збереження
             val editor = sharedPref.edit()
             editor.putString("name", name)
             editor.putString("email", email)
             editor.putString("login", login)
             editor.putString("password", password)
-            editor.putBoolean("isAuthorized", true) // 🔥 одразу авторизований
+            editor.putBoolean("isAuthorized", true)
             editor.apply()
 
             Toast.makeText(this, "Реєстрація успішна!", Toast.LENGTH_SHORT).show()
 
-            // 🔥 ПЕРЕХІД ДАЛІ (тимчасово в MainActivity)
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
     }
