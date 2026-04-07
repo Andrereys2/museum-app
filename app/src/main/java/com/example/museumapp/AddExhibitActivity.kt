@@ -1,46 +1,71 @@
 package com.example.museumapp
 
-import android.content.Context
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.widget.EditText
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.button.MaterialButton
 
 class AddExhibitActivity : AppCompatActivity() {
+
+    private var imageUri: Uri? = null
+    private val PICK_IMAGE = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_exhibit)
 
-        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
-        val etExhibit = findViewById<EditText>(R.id.etExhibit)
-        val btnSave = findViewById<MaterialButton>(R.id.btnSave)
+        val etName = findViewById<EditText>(R.id.etName)
+        val etAuthor = findViewById<EditText>(R.id.etAuthor)
+        val etType = findViewById<EditText>(R.id.etType)
+        val etNumber = findViewById<EditText>(R.id.etNumber)
 
-        val sharedPref = getSharedPreferences("Exhibits", Context.MODE_PRIVATE)
+        val btnPickImage = findViewById<Button>(R.id.btnPickImage)
+        val imagePreview = findViewById<ImageView>(R.id.imagePreview)
+        val btnSave = findViewById<Button>(R.id.btnSave)
 
-        // (можеш не юзати toolbar якщо не хочеш)
-        toolbar.setOnClickListener {
-            finish()
+        // 🔥 ВИБІР ФОТО
+        btnPickImage.setOnClickListener {
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent, PICK_IMAGE)
         }
 
+        // 🔥 ЗБЕРЕЖЕННЯ
         btnSave.setOnClickListener {
 
-            val newExhibit = etExhibit.text.toString()
+            val name = etName.text.toString()
+            val author = etAuthor.text.toString()
+            val type = etType.text.toString()
+            val number = etNumber.text.toString()
 
-            if (newExhibit.isEmpty()) {
-                Toast.makeText(this, "Введіть назву", Toast.LENGTH_SHORT).show()
+            if (name.isEmpty() || author.isEmpty()) {
+                Toast.makeText(this, "Заповніть обов'язкові поля", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
+            val data = "$name|$author|$type|$number|${imageUri.toString()}"
+
+            val sharedPref = getSharedPreferences("Exhibits", MODE_PRIVATE)
             val old = sharedPref.getString("list", "") ?: ""
-            val updated = if (old.isEmpty()) newExhibit else "$old|$newExhibit"
+            val updated = if (old.isEmpty()) data else "$old;;$data"
 
             sharedPref.edit().putString("list", updated).apply()
 
-            Toast.makeText(this, "Збережено!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Експонат додано!", Toast.LENGTH_SHORT).show()
             finish()
+        }
+    }
+
+    // 🔥 ОТРИМАННЯ ФОТО
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == PICK_IMAGE && resultCode == Activity.RESULT_OK) {
+            imageUri = data?.data
+            val imagePreview = findViewById<ImageView>(R.id.imagePreview)
+            imagePreview.setImageURI(imageUri)
         }
     }
 }

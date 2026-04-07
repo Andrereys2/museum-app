@@ -5,13 +5,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!-- 🔥 TOOLBAR -->
-    <com.google.android.material.appbar.MaterialToolbar
+    <!-- 🔥 ВЕРХ -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:title="Museum App"
         android:background="#6750A4"
-        android:titleTextColor="#FFFFFF"/>
+        android:padding="12dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Museum App"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"/>
+    </LinearLayout>
 
     <!-- 🔥 КОНТЕНТ -->
     <FrameLayout
@@ -20,7 +29,7 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <!-- 🔥 НИЖНЄ МЕНЮ -->
+    <!-- 🔥 НИЗ -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"

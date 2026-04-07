@@ -1,39 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:fillViewport="true">
 
-    <!-- 🔥 TOOLBAR -->
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:title="Додати експонат"
-        android:background="#6750A4"
-        android:titleTextColor="#FFFFFF" />
-
-    <!-- 🔥 КОНТЕНТ -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="24dp"
-        android:gravity="center">
+        android:padding="24dp">
+
+        <!-- 🔥 ЗАГОЛОВОК -->
+        <TextView
+            android:text="Додати експонат"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
         <EditText
-            android:id="@+id/etExhibit"
-            android:hint="Назва експоната"
+            android:id="@+id/etName"
+            android:hint="Назва"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/etAuthor"
+            android:hint="Автор"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/etType"
+            android:hint="Тип"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/etNumber"
+            android:hint="Номер"
+            android:inputType="number"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- 🔥 ФОТО -->
+        <Button
+            android:id="@+id/btnPickImage"
+            android:text="Обрати фото"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:id="@+id/imagePreview"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="10dp"
+            android:scaleType="centerCrop"
+            android:background="#DDDDDD"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSave"
             android:text="Зберегти"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>
