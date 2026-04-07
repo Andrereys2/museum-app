@@ -1,7 +1,7 @@
 package com.example.museumapp
 
-import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -34,20 +34,18 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.nav_home -> {
-                    supportActionBar?.title = "Експонати"
-                    showExhibits()
+                    startActivity(Intent(this, ExhibitsActivity::class.java))
                     true
                 }
 
                 R.id.nav_add -> {
-                    supportActionBar?.title = "Додати"
-                    startActivity(android.content.Intent(this, AddExhibitActivity::class.java))
+                    startActivity(Intent(this, AddExhibitActivity::class.java))
                     true
                 }
 
+                // 🔥 ВИПРАВЛЕНО — ТЕПЕР ЯК ВСЮДИ
                 R.id.nav_profile -> {
-                    supportActionBar?.title = "Профіль"
-                    showProfile()
+                    startActivity(Intent(this, ProfileActivity::class.java))
                     true
                 }
 
@@ -58,82 +56,42 @@ class MainActivity : AppCompatActivity() {
         showMain()
     }
 
-    private fun getList(): MutableList<String> {
-        val saved = sharedPref.getString("list", "") ?: ""
-        return if (saved.isEmpty()) mutableListOf()
-        else saved.split("|").toMutableList()
-    }
-
-    private fun saveList(list: List<String>) {
-        val joined = list.joinToString("|")
-        sharedPref.edit().putString("list", joined).apply()
-    }
-
+    // 🔥 ГОЛОВНА
     private fun showMain() {
-        val text = TextView(this)
-        text.text = "Ласкаво просимо в Museum App 👋"
-        text.textSize = 20f
 
-        frame.removeAllViews()
-        frame.addView(text)
-    }
+        val layout = LinearLayout(this)
+        layout.orientation = LinearLayout.VERTICAL
+        layout.setPadding(40, 40, 40, 40)
 
-    private fun showExhibits() {
-        val listView = ListView(this)
-        val list = getList()
+        val title = TextView(this)
+        title.text = "Museum App 👋"
+        title.textSize = 24f
 
-        if (list.isEmpty()) list.add("Немає експонатів")
+        val list = sharedPref.getString("list", "") ?: ""
+        val count = if (list.isEmpty()) 0 else list.split(";;").size
 
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, list)
-        listView.adapter = adapter
+        val countText = TextView(this)
+        countText.text = "Кількість експонатів: $count"
+        countText.textSize = 18f
 
-        listView.setOnItemClickListener { _, _, position, _ ->
-
-            if (list[position] == "Немає експонатів") return@setOnItemClickListener
-
-            val input = EditText(this)
-            input.setText(list[position])
-
-            AlertDialog.Builder(this)
-                .setTitle("Редагувати")
-                .setView(input)
-                .setPositiveButton("Зберегти") { _, _ ->
-                    list[position] = input.text.toString()
-                    saveList(list)
-                    showExhibits()
-                }
-                .setNegativeButton("Скасувати", null)
-                .show()
+        val btnExhibits = Button(this)
+        btnExhibits.text = "Перейти до експонатів"
+        btnExhibits.setOnClickListener {
+            startActivity(Intent(this, ExhibitsActivity::class.java))
         }
 
-        listView.setOnItemLongClickListener { _, _, position, _ ->
-
-            if (list[position] == "Немає експонатів") return@setOnItemLongClickListener true
-
-            AlertDialog.Builder(this)
-                .setTitle("Видалити?")
-                .setMessage(list[position])
-                .setPositiveButton("Так") { _, _ ->
-                    list.removeAt(position)
-                    saveList(list)
-                    showExhibits()
-                }
-                .setNegativeButton("Ні", null)
-                .show()
-
-            true
+        val btnAdd = Button(this)
+        btnAdd.text = "Додати експонат"
+        btnAdd.setOnClickListener {
+            startActivity(Intent(this, AddExhibitActivity::class.java))
         }
 
-        frame.removeAllViews()
-        frame.addView(listView)
-    }
-
-    private fun showProfile() {
-        val text = TextView(this)
-        text.text = "Профіль користувача"
-        text.textSize = 20f
+        layout.addView(title)
+        layout.addView(countText)
+        layout.addView(btnExhibits)
+        layout.addView(btnAdd)
 
         frame.removeAllViews()
-        frame.addView(text)
+        frame.addView(layout)
     }
 }

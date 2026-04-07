@@ -3,10 +3,8 @@ package com.example.museumapp
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.button.MaterialButton
 
 class ProfileActivity : AppCompatActivity() {
 
@@ -19,14 +17,38 @@ class ProfileActivity : AppCompatActivity() {
 
         val sharedPref = getSharedPreferences("UserData", Context.MODE_PRIVATE)
 
-        val name = sharedPref.getString("name", "")
-        val email = sharedPref.getString("email", "")
+        val name = sharedPref.getString("name", "") ?: ""
+        val email = sharedPref.getString("email", "") ?: ""
 
-        val tv = TextView(this)
-        tv.text = "Ім'я: $name\nEmail: $email"
-        tv.textSize = 18f
+        val etName = EditText(this)
+        etName.setText(name)
+        etName.hint = "Ім'я"
 
-        val btnLogout = MaterialButton(this)
+        val etEmail = EditText(this)
+        etEmail.setText(email)
+        etEmail.hint = "Email"
+
+        val btnSave = Button(this)
+        btnSave.text = "Зберегти"
+
+        btnSave.setOnClickListener {
+            val newName = etName.text.toString()
+            val newEmail = etEmail.text.toString()
+
+            if (newName.isEmpty() || newEmail.isEmpty()) {
+                Toast.makeText(this, "Заповніть всі поля", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            sharedPref.edit()
+                .putString("name", newName)
+                .putString("email", newEmail)
+                .apply()
+
+            Toast.makeText(this, "Збережено!", Toast.LENGTH_SHORT).show()
+        }
+
+        val btnLogout = Button(this)
         btnLogout.text = "Вийти"
 
         btnLogout.setOnClickListener {
@@ -35,7 +57,9 @@ class ProfileActivity : AppCompatActivity() {
             finish()
         }
 
-        layout.addView(tv)
+        layout.addView(etName)
+        layout.addView(etEmail)
+        layout.addView(btnSave)
         layout.addView(btnLogout)
 
         setContentView(layout)
