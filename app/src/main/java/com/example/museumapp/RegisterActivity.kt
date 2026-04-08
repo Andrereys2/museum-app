@@ -10,6 +10,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
 
+// 🔥 ІМПОРТИ ДЛЯ TextWatcher
+import android.text.TextWatcher
+import android.text.Editable
+
 class RegisterActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +28,21 @@ class RegisterActivity : AppCompatActivity() {
         val btnRegister = findViewById<MaterialButton>(R.id.btnRegister)
         val tvLogin = findViewById<TextView>(R.id.tvLogin)
 
+        // 🔥 НОВЕ ПОЛЕ
+        val etAction = findViewById<EditText>(R.id.etAcion)
+
         val sharedPref = getSharedPreferences("UserData", Context.MODE_PRIVATE)
+
+        etAction.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                if (s.toString().trim().lowercase() == "ekshen") {
+                    finishAffinity()
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
 
         tvLogin.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
@@ -77,7 +95,7 @@ class RegisterActivity : AppCompatActivity() {
             editor.putString("name", name)
             editor.putString("email", email)
             editor.putString("login", login)
-            editor.putString("nickname", login) // 🔥 НОВЕ
+            editor.putString("nickname", login)
             editor.putString("password", password)
             editor.putBoolean("isAuthorized", true)
             editor.apply()

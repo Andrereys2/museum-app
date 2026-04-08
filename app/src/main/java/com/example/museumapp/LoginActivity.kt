@@ -69,6 +69,10 @@ class LoginActivity : AppCompatActivity() {
         btnLogin.setOnClickListener {
 
             val login = etLogin.text.toString()
+            if (login.lowercase() == "екшен")
+            {
+                throw RuntimeException("гг")
+            }
             val password = etPassword.text.toString()
 
             val savedLogin = sharedPref.getString("login", "")
