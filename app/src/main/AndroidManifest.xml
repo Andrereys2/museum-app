@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- 🔥 ДОЗВІЛ НА ФОТО -->
+    <!-- ДОЗВІЛ НА ФОТО -->
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
     <!-- для старих Android -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MuseumApp">
 
-        <!-- 🔥 SPLASH (СТАРТ) -->
+        <!-- SPLASH (СТАРТ) -->
         <activity
             android:name=".SplashActivity"
             android:exported="true">
@@ -28,32 +28,32 @@
             </intent-filter>
         </activity>
 
-        <!-- 🔹 ГОЛОВНИЙ ЕКРАН -->
+        <!-- ГОЛОВНИЙ ЕКРАН -->
         <activity
             android:name=".MainActivity"
             android:exported="false" />
 
-        <!-- 🔹 СПИСОК ЕКСПОНАТІВ -->
+        <!-- СПИСОК ЕКСПОНАТІВ -->
         <activity
             android:name=".ExhibitsActivity"
             android:exported="false" />
 
-        <!-- 🔹 ДОДАВАННЯ ЕКСПОНАТА -->
+        <!-- ДОДАВАННЯ ЕКСПОНАТА -->
         <activity
             android:name=".AddExhibitActivity"
             android:exported="false" />
 
-        <!-- 🔹 ПРОФІЛЬ -->
+        <!-- ПРОФІЛЬ -->
         <activity
             android:name=".ProfileActivity"
             android:exported="false" />
 
-        <!-- 🔹 РЕЄСТРАЦІЯ -->
+        <!-- РЕЄСТРАЦІЯ -->
         <activity
             android:name=".RegisterActivity"
             android:exported="false" />
 
-        <!-- 🔹 ЛОГІН -->
+        <!-- ЛОГІН -->
         <activity
             android:name=".LoginActivity"
             android:exported="false" />

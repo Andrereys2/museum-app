@@ -22,7 +22,7 @@ class ExhibitsActivity : AppCompatActivity() {
         listView = findViewById(R.id.listView)
         sharedPref = getSharedPreferences("Exhibits", MODE_PRIVATE)
 
-        // 🔥 НИЖНЄ МЕНЮ
+        // НИЖНЄ МЕНЮ
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
 
         bottomNav.setOnItemSelectedListener {
@@ -102,7 +102,7 @@ class ExhibitsActivity : AppCompatActivity() {
 
         listView.adapter = adapter
 
-        // 🔥 РЕДАГУВАННЯ
+        // РЕДАГУВАННЯ
         listView.setOnItemClickListener { _, _, position, _ ->
 
             val parts = list[position].split("|").toMutableList()
@@ -144,7 +144,7 @@ class ExhibitsActivity : AppCompatActivity() {
                 .show()
         }
 
-        // 🔥 ВИДАЛЕННЯ
+        // ВИДАЛЕННЯ
         listView.setOnItemLongClickListener { _, _, position, _ ->
 
             AlertDialog.Builder(this)

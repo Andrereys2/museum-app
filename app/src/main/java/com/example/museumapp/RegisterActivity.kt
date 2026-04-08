@@ -26,12 +26,10 @@ class RegisterActivity : AppCompatActivity() {
 
         val sharedPref = getSharedPreferences("UserData", Context.MODE_PRIVATE)
 
-        // 🔥 перехід на логін
         tvLogin.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
         }
 
-        // 🔥 анімація кнопки
         btnRegister.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
@@ -47,7 +45,6 @@ class RegisterActivity : AppCompatActivity() {
             false
         }
 
-        // 🔥 реєстрація
         btnRegister.setOnClickListener {
 
             val name = etName.text.toString()
@@ -80,6 +77,7 @@ class RegisterActivity : AppCompatActivity() {
             editor.putString("name", name)
             editor.putString("email", email)
             editor.putString("login", login)
+            editor.putString("nickname", login) // 🔥 НОВЕ
             editor.putString("password", password)
             editor.putBoolean("isAuthorized", true)
             editor.apply()

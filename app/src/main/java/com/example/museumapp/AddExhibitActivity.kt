@@ -29,7 +29,6 @@ class AddExhibitActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // 🔥 БЕЗ ФОТО
             val data = "$name|$author|$type|$number"
 
             val sharedPref = getSharedPreferences("Exhibits", MODE_PRIVATE)

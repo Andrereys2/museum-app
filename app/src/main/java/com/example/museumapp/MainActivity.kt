@@ -43,7 +43,6 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
 
-                // 🔥 ВИПРАВЛЕНО — ТЕПЕР ЯК ВСЮДИ
                 R.id.nav_profile -> {
                     startActivity(Intent(this, ProfileActivity::class.java))
                     true
@@ -56,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         showMain()
     }
 
-    // 🔥 ГОЛОВНА
+    // ГОЛОВНА
     private fun showMain() {
 
         val layout = LinearLayout(this)

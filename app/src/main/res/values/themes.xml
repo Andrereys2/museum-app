@@ -2,7 +2,7 @@
 
     <style name="Base.Theme.MuseumApp" parent="Theme.Material3.DayNight.NoActionBar">
 
-        <!-- 🔥 ФІОЛЕТОВИЙ -->
+        <!--  ФІОЛЕТОВИЙ -->
         <item name="colorPrimary">#6750A4</item>
         <item name="colorOnPrimary">#FFFFFF</item>
 

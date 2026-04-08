@@ -10,7 +10,7 @@
         android:orientation="vertical"
         android:padding="24dp">
 
-        <!-- 🔥 ЗАГОЛОВОК -->
+        <!-- ЗАГОЛОВОК -->
         <TextView
             android:text="Додати експонат"
             android:textSize="22sp"
@@ -47,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <!-- 🔥 КНОПКА -->
+        <!-- КНОПКА -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSave"
             android:text="Зберегти"

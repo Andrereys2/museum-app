@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!-- 🔥 ВЕРХ -->
+    <!-- ВЕРХ -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,14 +20,14 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
-    <!-- 🔥 СПИСОК -->
+    <!-- СПИСОК -->
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
 
-    <!-- 🔥 НИЗ (ТВОЄ МЕНЮ) -->
+    <!-- НИЗ -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"

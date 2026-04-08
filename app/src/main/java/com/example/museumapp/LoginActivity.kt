@@ -23,7 +23,7 @@ class LoginActivity : AppCompatActivity() {
 
         val sharedPref = getSharedPreferences("UserData", Context.MODE_PRIVATE)
 
-        // 🔥 ЕФЕКТ ДЛЯ ТЕКСТУ (НАТИСКАННЯ)
+        // ЕФЕКТ ДЛЯ ТЕКСТУ (НАТИСКАННЯ)
         tvRegister.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
@@ -49,7 +49,7 @@ class LoginActivity : AppCompatActivity() {
             true
         }
 
-        // 🔥 ЕФЕКТ КНОПКИ
+        // ЕФЕКТ КНОПКИ
         btnLogin.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
@@ -65,7 +65,7 @@ class LoginActivity : AppCompatActivity() {
             false
         }
 
-        // 🔥 ЛОГІН
+        // ЛОГІН
         btnLogin.setOnClickListener {
 
             val login = etLogin.text.toString()
